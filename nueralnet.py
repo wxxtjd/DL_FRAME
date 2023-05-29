@@ -1,6 +1,5 @@
 import numpy as np
 from Layers import *
-import matplotlib.pyplot as plt
 
 class ANN:
     '''
@@ -75,10 +74,9 @@ class ANN:
 
             grads, loss_cost = self.backpropagation(x_train, t_train)
 
-            for key in grads.keys():
-                optimizer.update(self.layer_params[key], grads[key])
-            
-            if not (ep % 500):
+            optimizer.update(self.layer_params, grads)
+
+            if not (ep%100):
                 if DisplayAcc:
                     pred = self.predict(x_test)
                     pred = np.argmax(pred, axis=1)
